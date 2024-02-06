@@ -1,4 +1,5 @@
 "use client"
+import { Button } from "@mui/material";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
@@ -18,7 +19,7 @@ export default function Control(){
             <li><Link href="/create">create</Link></li>
             {params.id === undefined ? null : <>
                 <li><Link href={`/update/${params.id}`}>update</Link></li>
-                <li><button onClick={deleteHandler}>delete</button></li>
+                <li><Button variant="contained" onClick={deleteHandler}>delete</Button></li>
             </>}
         </ul>
     )
