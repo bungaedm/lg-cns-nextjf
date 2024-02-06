@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link"
+import Control from "../../components/Control";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,9 +13,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const resp = await fetch('http://localhost:9999/page');
+  console.log('RootLayout');
+  const resp = await fetch('http://localhost:9999/page',{
+    next:{revalidate:0}
+  });
   const data = await resp.json();
+  console.log('data', data);
 
   return (
     <html lang="en">
@@ -34,11 +38,7 @@ export default async function RootLayout({
         <article>
           {children}
         </article>
-        <ul>
-          <li><Link href="/create">create</Link></li>
-          <li><Link href="/update/id">update</Link></li>
-          <li><button>delete</button></li>
-        </ul>
+        <Control></Control>
       </body>
     </html>
   );
